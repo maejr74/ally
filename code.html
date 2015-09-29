@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+table, th , td  {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+}
+table tr:nth-child(odd)	{
+    background-color: #bbd8c4;
+}
+table tr:nth-child(even) {
+    background-color: #ddebe1;
+}
+</style>
+</head>
+
+<body>
+
+
+<div id="urbank"></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "code-test.json";
+
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        myFunction(xmlhttp.responseText);
+    }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out = "<table>";
+
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" + 
+        arr[i].name +
+        "</td><td>" +
+        arr[i].apy +
+        "</td><td>" +
+        arr[i].earnings +
+        "</td></tr>";
+    }
+    out += "</table>";
+    document.getElementById("urbank").innerHTML = out;
+}
+</script>
+
+</body>
+</html>
